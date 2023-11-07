@@ -1,12 +1,12 @@
 package com.rubenshenrique.workshopmongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rubenshenrique.workshopmongo.domain.Post;
-import com.rubenshenrique.workshopmongo.domain.User;
 import com.rubenshenrique.workshopmongo.repository.PostRepository;
 import com.rubenshenrique.workshopmongo.services.exception.ObjectNotFoundExcepetion;
 
@@ -21,4 +21,8 @@ public class PostService {
 		Optional<Post> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundExcepetion("Objeto Não Encontrado"));
 		}
+	
+	public List<Post> findByTitle(String text){
+		return repo.findByTitleContainingIgnoreCase(text);
+	}
 }
